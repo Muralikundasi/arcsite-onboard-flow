@@ -2,7 +2,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OnboardingFlow from '@/components/OnboardingFlow';
-import { UserContext } from '@/App';
+import { UserContext, UserType } from '@/App';
 
 const Onboarding = () => {
   const { user } = useContext(UserContext);
