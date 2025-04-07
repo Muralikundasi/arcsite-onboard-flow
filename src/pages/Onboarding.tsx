@@ -2,7 +2,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OnboardingFlow from '@/components/OnboardingFlow';
-import { UserContext, UserType } from '@/App';
+import { UserContext } from '@/App';
 
 const Onboarding = () => {
   const { user } = useContext(UserContext);
@@ -18,8 +18,10 @@ const Onboarding = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white p-6">
-      <OnboardingFlow />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white p-8">
+      <div className="w-full max-w-5xl">
+        <OnboardingFlow />
+      </div>
     </div>
   );
 };

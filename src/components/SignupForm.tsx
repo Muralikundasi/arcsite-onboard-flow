@@ -37,37 +37,37 @@ const SignupForm = () => {
 
   return (
     <div className="flex overflow-hidden rounded-xl shadow-xl bg-white">
-      {/* Left side with features */}
-      <div className="hidden md:block bg-gradient-to-br from-orange-50 to-orange-100 p-8 w-[280px]">
-        <h3 className="text-xl font-semibold mb-6 text-gray-800">Create your account to:</h3>
+      {/* Left side with features - shown on larger tablets */}
+      <div className="hidden md:block bg-gradient-to-br from-orange-50 to-orange-100 p-8 w-[320px]">
+        <h3 className="text-2xl font-semibold mb-8 text-gray-800">Create your account to:</h3>
         
-        <div className="space-y-6">
-          <div className="flex items-start gap-3">
-            <div className="bg-orange-200 p-2 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
+        <div className="space-y-8">
+          <div className="flex items-start gap-4">
+            <div className="bg-orange-200 p-3 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
                 <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
                 <polyline points="14 2 14 8 20 8"/>
               </svg>
             </div>
             <div>
-              <p className="font-medium text-gray-800">Sketch and save unlimited drawings</p>
+              <p className="font-medium text-lg text-gray-800">Sketch and save unlimited drawings</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-3">
-            <div className="bg-orange-200 p-2 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
+          <div className="flex items-start gap-4">
+            <div className="bg-orange-200 p-3 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
               </svg>
             </div>
             <div>
-              <p className="font-medium text-gray-800">Access to 2000+ free shapes</p>
+              <p className="font-medium text-lg text-gray-800">Access to 2000+ free shapes</p>
             </div>
           </div>
           
-          <div className="flex items-start gap-3">
-            <div className="bg-orange-200 p-2 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
+          <div className="flex items-start gap-4">
+            <div className="bg-orange-200 p-3 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
                 <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/>
                 <path d="M3 9V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"/>
                 <path d="M12 13v5"/>
@@ -76,23 +76,23 @@ const SignupForm = () => {
               </svg>
             </div>
             <div>
-              <p className="font-medium text-gray-800">Access advanced CAD tools from anywhere</p>
+              <p className="font-medium text-lg text-gray-800">Access advanced CAD tools from anywhere</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Right side with form */}
-      <div className="p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Get Started with Arcsite</h2>
+      <div className="p-8 w-full max-w-md mx-auto">
+        <h2 className="text-3xl font-bold mb-8 text-gray-800">Get Started with Arcsite</h2>
         
-        <div className="space-y-4 mb-6">
-          <Button variant="outline" className="w-full border-2 gap-2 justify-center py-5 h-auto font-medium" onClick={() => console.log("Apple login")}>
-            <Apple size={18} /> Continue with Apple
+        <div className="space-y-5 mb-8">
+          <Button variant="outline" className="w-full border-2 gap-2 justify-center py-6 h-auto text-lg font-medium" onClick={() => console.log("Apple login")}>
+            <Apple size={20} /> Continue with Apple
           </Button>
           
-          <Button variant="outline" className="w-full border-2 gap-2 justify-center py-5 h-auto font-medium" onClick={() => console.log("Google login")}>
-            <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+          <Button variant="outline" className="w-full border-2 gap-2 justify-center py-6 h-auto text-lg font-medium" onClick={() => console.log("Google login")}>
+            <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
               <g transform="matrix(1, 0, 0, 1, 27.009001, -39.238998)">
                 <path fill="#4285F4" d="M -3.264 51.509 C -3.264 50.719 -3.334 49.969 -3.454 49.239 L -14.754 49.239 L -14.754 53.749 L -8.284 53.749 C -8.574 55.229 -9.424 56.479 -10.684 57.329 L -10.684 60.329 L -6.824 60.329 C -4.564 58.239 -3.264 55.159 -3.264 51.509 Z"/>
                 <path fill="#34A853" d="M -14.754 63.239 C -11.514 63.239 -8.804 62.159 -6.824 60.329 L -10.684 57.329 C -11.764 58.049 -13.134 58.489 -14.754 58.489 C -17.884 58.489 -20.534 56.379 -21.484 53.529 L -25.464 53.529 L -25.464 56.619 C -23.494 60.539 -19.444 63.239 -14.754 63.239 Z"/>
@@ -103,62 +103,62 @@ const SignupForm = () => {
             Continue with Google
           </Button>
           
-          <Button variant="outline" className="w-full border-2 gap-2 justify-center py-5 h-auto font-medium" onClick={() => console.log("SSO login")}>
-            <Github size={18} /> Continue with SSO
+          <Button variant="outline" className="w-full border-2 gap-2 justify-center py-6 h-auto text-lg font-medium" onClick={() => console.log("SSO login")}>
+            <Github size={20} /> Continue with SSO
           </Button>
         </div>
         
-        <div className="relative mb-6">
+        <div className="relative mb-8">
           <Separator className="absolute top-1/2 w-full" />
           <div className="relative flex justify-center">
-            <span className="bg-white px-4 text-sm text-gray-500">Or</span>
+            <span className="bg-white px-6 text-base text-gray-500">Or</span>
           </div>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-1">
-            <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-base font-medium">Full Name</Label>
             <div className="relative">
-              <LucideUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <LucideUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input 
                 id="name" 
                 type="text" 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter your name" 
-                className="pl-10"
+                className="pl-12 py-6 text-lg h-auto"
                 required
               />
             </div>
           </div>
           
-          <div className="space-y-1">
-            <Label htmlFor="email" className="text-sm font-medium">Work Email</Label>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-base font-medium">Work Email</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input 
                 id="email" 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@company.com" 
-                className="pl-10"
+                className="pl-12 py-6 text-lg h-auto"
                 required
               />
             </div>
           </div>
           
-          <div className="space-y-1">
-            <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-base font-medium">Password</Label>
             <div className="relative">
-              <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input 
                 id="password" 
                 type="password" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a secure password" 
-                className="pl-10"
+                className="pl-12 py-6 text-lg h-auto"
                 required
               />
             </div>
@@ -166,18 +166,18 @@ const SignupForm = () => {
           
           <Button 
             type="submit" 
-            className="w-full bg-blue-600 hover:bg-blue-700 py-6 h-auto text-base font-medium"
+            className="w-full bg-blue-600 hover:bg-blue-700 py-7 h-auto text-lg font-medium mt-4"
             disabled={isLoading}
           >
             {isLoading ? "Creating Account..." : "Get Started"}
           </Button>
           
-          <p className="text-center text-xs text-gray-500 mt-4">
+          <p className="text-center text-sm text-gray-500 mt-6">
             By registering, you agree to our <a href="#" className="text-primary hover:underline">Terms of Service</a> and <a href="#" className="text-primary hover:underline">Privacy Policy</a>.
           </p>
         </form>
         
-        <div className="mt-6 text-center text-sm">
+        <div className="mt-8 text-center text-base">
           Already have an account? <a href="#" className="text-primary font-medium hover:underline">Log in</a>
         </div>
       </div>

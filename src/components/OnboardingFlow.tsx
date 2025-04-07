@@ -137,9 +137,9 @@ const OnboardingFlow = () => {
       <div className="onboarding-card animate-fade-in">
         <ProgressBar currentStep={currentStep + 1} totalSteps={totalSteps} />
         
-        <h1 className="onboarding-question">{currentQuestion.question}</h1>
+        <h1 className="text-3xl font-semibold text-gray-800 mb-8">{currentQuestion.question}</h1>
         
-        <div className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-6">
           {currentQuestion.options.map((option) => (
             <div
               key={option.id}
@@ -147,36 +147,36 @@ const OnboardingFlow = () => {
               onClick={() => handleOptionSelect(currentQuestion.id, option.id)}
             >
               <div className="flex-1">
-                <h3 className="font-medium text-gray-900">{option.label}</h3>
+                <h3 className="text-lg font-medium text-gray-900">{option.label}</h3>
                 {option.description && (
-                  <p className="text-sm text-gray-500 mt-1">{option.description}</p>
+                  <p className="text-base text-gray-500 mt-2">{option.description}</p>
                 )}
               </div>
               {selections[currentQuestion.id] === option.id && (
-                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                  <Check className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <Check className="w-5 h-5 text-white" />
                 </div>
               )}
             </div>
           ))}
         </div>
         
-        <div className="flex justify-between mt-8">
+        <div className="flex justify-between mt-10">
           <Button
             variant="outline"
             onClick={handlePrevious}
             disabled={currentStep === 0}
-            className="onboarding-button"
+            className="onboarding-button text-lg px-10 py-6 h-auto"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-2 h-5 w-5" />
             Back
           </Button>
           <Button 
             onClick={handleNext}
-            className="onboarding-button"
+            className="onboarding-button text-lg px-10 py-6 h-auto"
           >
             Next
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
       </div>
@@ -191,44 +191,44 @@ const OnboardingFlow = () => {
       <div className="onboarding-card animate-fade-in">
         <ProgressBar currentStep={totalSteps} totalSteps={totalSteps} />
         
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">
             Your Arcsite experience is ready!
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-2xl text-gray-600">
             Welcome! We've customized Arcsite to help you accomplish {goalLabel} for {projectLabel}.
           </p>
         </div>
         
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-8 mb-10">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
             Here's what we've prepared for you:
           </h2>
-          <ul className="space-y-3">
+          <ul className="space-y-4">
             <li className="flex items-start">
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3 mt-0.5">
-                <Check className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                <Check className="w-5 h-5 text-white" />
               </div>
-              <span>Personalized dashboard with relevant tools and templates</span>
+              <span className="text-xl">Personalized dashboard with relevant tools and templates</span>
             </li>
             <li className="flex items-start">
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3 mt-0.5">
-                <Check className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                <Check className="w-5 h-5 text-white" />
               </div>
-              <span>Guided tutorial for {user?.urgentNeed?.toLowerCase() || "your most urgent need"}</span>
+              <span className="text-xl">Guided tutorial for {user?.urgentNeed?.toLowerCase() || "your most urgent need"}</span>
             </li>
             <li className="flex items-start">
-              <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mr-3 mt-0.5">
-                <Check className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                <Check className="w-5 h-5 text-white" />
               </div>
-              <span>Sample projects relevant to {user?.userRole || "your role"}</span>
+              <span className="text-xl">Sample projects relevant to {user?.userRole || "your role"}</span>
             </li>
           </ul>
         </div>
         
         <Button 
           onClick={handleComplete}
-          className="w-full onboarding-button text-lg"
+          className="w-full onboarding-button text-xl py-7 h-auto"
           size="lg"
         >
           Let's Get Started
