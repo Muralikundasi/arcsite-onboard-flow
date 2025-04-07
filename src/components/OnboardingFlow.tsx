@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import ProgressBar from './ProgressBar';
-import { UserContext } from '@/App';
+import { UserContext, UserType } from '@/App';
 import { toast } from "@/components/ui/use-toast";
 
 type Option = {
