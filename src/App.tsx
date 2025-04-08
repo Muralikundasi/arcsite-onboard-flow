@@ -8,6 +8,7 @@ import { useState, createContext } from "react";
 import Index from "./pages/Index";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import DrawingBoard from "./pages/DrawingBoard";
 import NotFound from "./pages/NotFound";
 
 // Create a user context
@@ -44,6 +45,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/drawing-board" element={<DrawingBoard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

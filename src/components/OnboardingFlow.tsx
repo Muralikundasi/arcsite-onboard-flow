@@ -148,7 +148,14 @@ const OnboardingFlow = () => {
       title: "Onboarding Complete!",
       description: "Your Arcsite experience has been customized based on your preferences."
     });
-    navigate('/dashboard');
+    
+    if (user?.urgentNeed?.toLowerCase().includes("drawing") || 
+        user?.urgentNeed?.toLowerCase().includes("plan") ||
+        user?.urgentNeed?.toLowerCase().includes("measure")) {
+      navigate('/drawing-board');
+    } else {
+      navigate('/dashboard');
+    }
   };
 
   const getAnimationIcons = () => {
