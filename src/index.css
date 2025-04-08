@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -113,6 +114,29 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseLight {
+  0% { background-color: rgba(239, 246, 255, 0.6); }
+  50% { background-color: rgba(219, 234, 254, 0.8); }
+  100% { background-color: rgba(239, 246, 255, 0.6); }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-pulse-light {
+  animation: pulseLight 1.5s infinite;
+}
+
+.hover\:bg-primary-dark:hover {
+  background-color: hsl(210, 100%, 45%);
 }

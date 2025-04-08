@@ -1,11 +1,12 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles } from "lucide-react";
 import ProgressBar from './ProgressBar';
 import { UserContext, UserType } from '@/App';
 import { toast } from "@/components/ui/use-toast";
+import PersonalizationPreview from './PersonalizationPreview';
 
 type Option = {
   id: string;
@@ -26,6 +27,8 @@ const OnboardingFlow = () => {
   const { user, setUser } = useContext(UserContext);
   const [currentStep, setCurrentStep] = useState(0);
   const [selections, setSelections] = useState<Record<string, string>>({});
+  const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
+  const [showPersonalization, setShowPersonalization] = useState(false);
 
   const questions: OnboardingQuestion[] = [
     {
@@ -77,11 +80,29 @@ const OnboardingFlow = () => {
 
   const totalSteps = questions.length + 1; // Questions + final customization step
 
+  // Effect to animate personalization preview
+  useEffect(() => {
+    if (selectedOptionId) {
+      // Show personalization animation after selection
+      const timer = setTimeout(() => {
+        setShowPersonalization(true);
+        // Hide after 3 seconds
+        const hideTimer = setTimeout(() => {
+          setShowPersonalization(false);
+          setSelectedOptionId(null);
+        }, 3000);
+        return () => clearTimeout(hideTimer);
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedOptionId]);
+
   const handleOptionSelect = (questionId: string, optionId: string) => {
     setSelections({
       ...selections,
       [questionId]: optionId
     });
+    setSelectedOptionId(optionId);
   };
 
   const handleNext = () => {
@@ -109,16 +130,23 @@ const OnboardingFlow = () => {
     }
 
     if (currentStep < questions.length - 1) {
-      setCurrentStep(currentStep + 1);
+      // Show personalization animation before moving to next step
+      setTimeout(() => {
+        setCurrentStep(currentStep + 1);
+        setShowPersonalization(false);
+        setSelectedOptionId(null);
+      }, 400);
     } else {
       // Finish onboarding
       setCurrentStep(currentStep + 1);
+      setShowPersonalization(false);
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+      setShowPersonalization(false);
     }
   };
 
@@ -134,16 +162,18 @@ const OnboardingFlow = () => {
     const currentQuestion = questions[currentStep];
     
     return (
-      <div className="onboarding-card animate-fade-in">
+      <div className="onboarding-card animate-fade-in relative">
         <ProgressBar currentStep={currentStep + 1} totalSteps={totalSteps} />
         
         <h1 className="text-3xl font-semibold text-gray-800 mb-8">{currentQuestion.question}</h1>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 relative">
           {currentQuestion.options.map((option) => (
             <div
               key={option.id}
-              className={`option-card ${selections[currentQuestion.id] === option.id ? 'selected' : ''}`}
+              className={`option-card ${selections[currentQuestion.id] === option.id ? 'selected' : ''} 
+                        transition-all duration-300 hover:translate-y-[-4px] hover:shadow-md
+                        ${selectedOptionId === option.id ? 'animate-pulse-light' : ''}`}
               onClick={() => handleOptionSelect(currentQuestion.id, option.id)}
             >
               <div className="flex-1">
@@ -153,13 +183,21 @@ const OnboardingFlow = () => {
                 )}
               </div>
               {selections[currentQuestion.id] === option.id && (
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center animate-scale-in">
                   <Check className="w-5 h-5 text-white" />
                 </div>
               )}
             </div>
           ))}
         </div>
+        
+        {/* Personalization Preview */}
+        {showPersonalization && (
+          <PersonalizationPreview 
+            questionType={currentQuestion.id} 
+            selectedOptionId={selectedOptionId || ''} 
+          />
+        )}
         
         <div className="flex justify-between mt-10">
           <Button
@@ -173,10 +211,10 @@ const OnboardingFlow = () => {
           </Button>
           <Button 
             onClick={handleNext}
-            className="onboarding-button text-lg px-10 py-6 h-auto"
+            className="onboarding-button text-lg px-10 py-6 h-auto group"
           >
             Next
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>
@@ -192,8 +230,9 @@ const OnboardingFlow = () => {
         <ProgressBar currentStep={totalSteps} totalSteps={totalSteps} />
         
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl font-bold text-gray-900 mb-6 flex items-center justify-center">
             Your Arcsite experience is ready!
+            <Sparkles className="h-6 w-6 ml-2 text-yellow-500 animate-pulse" />
           </h1>
           <p className="text-2xl text-gray-600">
             Welcome! We've customized Arcsite to help you accomplish {goalLabel} for {projectLabel}.
@@ -205,19 +244,19 @@ const OnboardingFlow = () => {
             Here's what we've prepared for you:
           </h2>
           <ul className="space-y-4">
-            <li className="flex items-start">
+            <li className="flex items-start animate-fade-in" style={{ animationDelay: '0.1s' }}>
               <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
                 <Check className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl">Personalized dashboard with relevant tools and templates</span>
             </li>
-            <li className="flex items-start">
+            <li className="flex items-start animate-fade-in" style={{ animationDelay: '0.3s' }}>
               <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
                 <Check className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl">Guided tutorial for {user?.urgentNeed?.toLowerCase() || "your most urgent need"}</span>
             </li>
-            <li className="flex items-start">
+            <li className="flex items-start animate-fade-in" style={{ animationDelay: '0.5s' }}>
               <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
                 <Check className="w-5 h-5 text-white" />
               </div>
@@ -228,7 +267,7 @@ const OnboardingFlow = () => {
         
         <Button 
           onClick={handleComplete}
-          className="w-full onboarding-button text-xl py-7 h-auto"
+          className="w-full onboarding-button text-xl py-7 h-auto transition-all duration-300 hover:bg-primary-dark hover:scale-[1.02]"
           size="lg"
         >
           Let's Get Started
