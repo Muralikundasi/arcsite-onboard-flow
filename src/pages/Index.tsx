@@ -4,9 +4,12 @@ import SignupForm from '@/components/SignupForm';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white p-6">
-      {/* Constrain width for tablet display */}
-      <div className="w-full max-w-5xl">
+    <div className="min-h-screen bg-grid-pattern flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Grid background layer */}
+      <div className="absolute inset-0 bg-grid-pattern z-0"></div>
+      
+      {/* Content container */}
+      <div className="w-full max-w-5xl relative z-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="md:order-1">
             <div className="pr-6">

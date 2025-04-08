@@ -38,7 +38,7 @@ const SignupForm = () => {
   return (
     <div className="flex overflow-hidden rounded-xl shadow-xl bg-white">
       {/* Left side with features - shown on larger tablets */}
-      <div className="hidden md:block bg-gradient-to-br from-orange-50 to-orange-100 p-8 w-[320px]">
+      <div className="hidden md:block bg-gradient-to-b from-orange-50 to-orange-100 p-8 w-[320px]">
         <h3 className="text-2xl font-semibold mb-8 text-gray-800">Create your account to:</h3>
         
         <div className="space-y-8">
