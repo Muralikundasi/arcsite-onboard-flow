@@ -36,54 +36,8 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="flex overflow-hidden rounded-xl shadow-xl bg-white">
-      {/* Left side with features - shown on larger tablets */}
-      <div className="hidden md:block bg-gradient-to-b from-orange-50 to-orange-100 p-8 w-[320px]">
-        <h3 className="text-2xl font-semibold mb-8 text-gray-800">Create your account to:</h3>
-        
-        <div className="space-y-8">
-          <div className="flex items-start gap-4">
-            <div className="bg-orange-200 p-3 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
-                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                <polyline points="14 2 14 8 20 8"/>
-              </svg>
-            </div>
-            <div>
-              <p className="font-medium text-lg text-gray-800">Sketch and save unlimited drawings</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start gap-4">
-            <div className="bg-orange-200 p-3 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-            </div>
-            <div>
-              <p className="font-medium text-lg text-gray-800">Access to 2000+ free shapes</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start gap-4">
-            <div className="bg-orange-200 p-3 rounded-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-600">
-                <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/>
-                <path d="M3 9V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"/>
-                <path d="M12 13v5"/>
-                <path d="M8 13v5"/>
-                <path d="M16 13v5"/>
-              </svg>
-            </div>
-            <div>
-              <p className="font-medium text-lg text-gray-800">Access advanced CAD tools from anywhere</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right side with form */}
-      <div className="p-8 w-full max-w-md mx-auto">
+    <div className="w-full max-w-lg mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
+      <div className="p-8 w-full">
         <h2 className="text-3xl font-bold mb-8 text-gray-800">Get Started with Arcsite</h2>
         
         <div className="space-y-5 mb-8">
