@@ -1,8 +1,7 @@
-
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, Zap, FileText, PenTool, FlaskConical } from "lucide-react";
 import ProgressBar from './ProgressBar';
 import { UserContext, UserType } from '@/App';
 import { toast } from "@/components/ui/use-toast";
@@ -80,13 +79,10 @@ const OnboardingFlow = () => {
 
   const totalSteps = questions.length + 1; // Questions + final customization step
 
-  // Effect to animate personalization preview
   useEffect(() => {
     if (selectedOptionId) {
-      // Show personalization animation after selection
       const timer = setTimeout(() => {
         setShowPersonalization(true);
-        // Hide after 3 seconds
         const hideTimer = setTimeout(() => {
           setShowPersonalization(false);
           setSelectedOptionId(null);
@@ -117,7 +113,6 @@ const OnboardingFlow = () => {
       return;
     }
 
-    // Update user context with the selection
     const selectedOption = currentQuestion.options.find(
       option => option.id === selections[currentQuestion.id]
     );
@@ -130,14 +125,12 @@ const OnboardingFlow = () => {
     }
 
     if (currentStep < questions.length - 1) {
-      // Show personalization animation before moving to next step
       setTimeout(() => {
         setCurrentStep(currentStep + 1);
         setShowPersonalization(false);
         setSelectedOptionId(null);
       }, 400);
     } else {
-      // Finish onboarding
       setCurrentStep(currentStep + 1);
       setShowPersonalization(false);
     }
@@ -158,12 +151,73 @@ const OnboardingFlow = () => {
     navigate('/dashboard');
   };
 
+  const getAnimationIcons = () => {
+    switch (currentStep) {
+      case 0:
+        return [
+          <FileText key="file" className="text-blue-500" />,
+          <PenTool key="pen" className="text-indigo-500" />,
+          <FlaskConical key="flask" className="text-purple-500" />
+        ];
+      case 1:
+        return [
+          <Zap key="zap" className="text-yellow-500" />,
+          <FileText key="file" className="text-blue-500" />,
+          <PenTool key="pen" className="text-indigo-500" />
+        ];
+      case 2:
+        return [
+          <PenTool key="pen" className="text-indigo-500" />,
+          <FlaskConical key="flask" className="text-purple-500" />,
+          <FileText key="file" className="text-blue-500" />
+        ];
+      case 3:
+        return [
+          <Sparkles key="sparkles" className="text-yellow-500" />,
+          <Zap key="zap" className="text-blue-500" />,
+          <PenTool key="pen" className="text-indigo-500" />
+        ];
+      default:
+        return [
+          <Sparkles key="sparkles" className="text-yellow-500" />,
+          <FileText key="file" className="text-blue-500" />,
+          <Zap key="zap" className="text-indigo-500" />
+        ];
+    }
+  };
+
   const renderQuestion = () => {
     const currentQuestion = questions[currentStep];
     
     return (
       <div className="onboarding-card animate-fade-in relative">
         <ProgressBar currentStep={currentStep + 1} totalSteps={totalSteps} />
+        
+        <div className="flex justify-center items-center mb-8 animation-container">
+          <div className="text-center relative">
+            <div className="text-lg font-medium text-blue-600 mb-2">
+              Your selections are personalizing your experience
+            </div>
+            <div className="flex justify-center gap-6 relative h-16">
+              {getAnimationIcons().map((icon, index) => (
+                <div 
+                  key={index} 
+                  className="animation-icon-wrapper"
+                  style={{ 
+                    animationDelay: `${index * 0.15}s`,
+                    animationDuration: `${1.5 + index * 0.2}s`
+                  }}
+                >
+                  {React.cloneElement(icon, { 
+                    size: 32,
+                    className: `${icon.props.className} animation-pulse`
+                  })}
+                </div>
+              ))}
+              <div className="animation-trail"></div>
+            </div>
+          </div>
+        </div>
         
         <h1 className="text-3xl font-semibold text-gray-800 mb-8">{currentQuestion.question}</h1>
         
@@ -191,7 +245,6 @@ const OnboardingFlow = () => {
           ))}
         </div>
         
-        {/* Personalization Preview */}
         {showPersonalization && (
           <PersonalizationPreview 
             questionType={currentQuestion.id} 
