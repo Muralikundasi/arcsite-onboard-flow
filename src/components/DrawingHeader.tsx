@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Undo, Redo, Download, Share, Settings, Save, HelpCircle, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
@@ -12,6 +12,20 @@ interface DrawingHeaderProps {
 }
 
 const DrawingHeader = ({ onGoToDashboard, onToggleTutorial, showTutorial }: DrawingHeaderProps) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  // Show tooltip when tutorial is closed (if it wasn't dismissed before)
+  useEffect(() => {
+    if (!showTutorial && localStorage.getItem('tutorial-tooltip-dismissed') !== 'true') {
+      setShowTooltip(true);
+    }
+  }, [showTutorial]);
+  
+  const handleDismissTooltip = () => {
+    setShowTooltip(false);
+    localStorage.setItem('tutorial-tooltip-dismissed', 'true');
+  };
+
   return (
     <header className="border-b border-gray-200 bg-white px-4 py-2">
       <div className="flex items-center justify-between">
@@ -57,7 +71,7 @@ const DrawingHeader = ({ onGoToDashboard, onToggleTutorial, showTutorial }: Draw
           
           <Collapsible>
             <TooltipProvider>
-              <Tooltip>
+              <Tooltip open={showTooltip} onOpenChange={setShowTooltip}>
                 <TooltipTrigger asChild>
                   <CollapsibleTrigger asChild>
                     <Button 
@@ -70,8 +84,8 @@ const DrawingHeader = ({ onGoToDashboard, onToggleTutorial, showTutorial }: Draw
                     </Button>
                   </CollapsibleTrigger>
                 </TooltipTrigger>
-                <TooltipContent sideOffset={10}>
-                  <p>Access tutorial anytime here</p>
+                <TooltipContent sideOffset={10} showCloseButton={true} onClose={handleDismissTooltip}>
+                  <p>Tutorial</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

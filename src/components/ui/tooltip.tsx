@@ -1,8 +1,9 @@
 
 import * as React from "react"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
-
+import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 const TooltipProvider = TooltipPrimitive.Provider
 
@@ -51,8 +52,8 @@ const TooltipTrigger = TooltipPrimitive.Trigger
 
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & { showCloseButton?: boolean; onClose?: () => void }
+>(({ className, sideOffset = 4, showCloseButton = false, onClose, ...props }, ref) => (
   <TooltipPrimitive.Content
     ref={ref}
     sideOffset={sideOffset}
@@ -61,7 +62,21 @@ const TooltipContent = React.forwardRef<
       className
     )}
     {...props}
-  />
+  >
+    <div className="relative">
+      {props.children}
+      {showCloseButton && (
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="h-5 w-5 absolute top-0 right-0 -mt-1 -mr-1" 
+          onClick={onClose}
+        >
+          <X className="h-3 w-3" />
+        </Button>
+      )}
+    </div>
+  </TooltipPrimitive.Content>
 ))
 TooltipContent.displayName = TooltipPrimitive.Content.displayName
 
