@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '@/App';
 import Tutorial from '@/components/Tutorial';
@@ -10,6 +11,7 @@ import { LayoutGrid, FileText, Calculator, BarChart3, Settings, User, BookOpen }
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const [showTutorial, setShowTutorial] = useState(true);
 
   useEffect(() => {
     // Redirect if no user exists
@@ -85,7 +87,12 @@ const Dashboard = () => {
         </div>
 
         {/* Tutorial based on urgent need */}
-        <Tutorial urgentNeed={user.urgentNeed} />
+        {showTutorial && (
+          <Tutorial 
+            urgentNeed={user.urgentNeed} 
+            onDismiss={() => setShowTutorial(false)} 
+          />
+        )}
 
         {/* Dashboard tabs */}
         <Tabs defaultValue="projects" className="mb-8">
