@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
@@ -5,7 +6,46 @@ import { cn } from "@/lib/utils"
 
 const TooltipProvider = TooltipPrimitive.Provider
 
-const Tooltip = TooltipPrimitive.Root
+const Tooltip = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>) => {
+  const [open, setOpen] = React.useState(false);
+  const [dismissed, setDismissed] = React.useState(() => {
+    // Check if the tooltip has been dismissed before
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('tutorial-tooltip-dismissed') === 'true';
+    }
+    return false;
+  });
+
+  // Handle dismissal
+  const handleDismiss = React.useCallback(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('tutorial-tooltip-dismissed', 'true');
+    }
+    setDismissed(true);
+    setOpen(false);
+  }, []);
+
+  // Only show tooltip if it hasn't been dismissed
+  if (dismissed) {
+    return <TooltipPrimitive.Root {...props}>{children}</TooltipPrimitive.Root>
+  }
+
+  return (
+    <TooltipPrimitive.Root 
+      open={open} 
+      onOpenChange={setOpen}
+      {...props}
+    >
+      {children}
+      {open && (
+        <div 
+          className="fixed inset-0 z-40" 
+          onClick={handleDismiss}
+        />
+      )}
+    </TooltipPrimitive.Root>
+  )
+}
 
 const TooltipTrigger = TooltipPrimitive.Trigger
 

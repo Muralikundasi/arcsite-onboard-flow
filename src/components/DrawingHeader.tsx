@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowLeft, Undo, Redo, Download, Share, Settings, Save, HelpCircle, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface DrawingHeaderProps {
   onGoToDashboard: () => void;
@@ -55,16 +56,25 @@ const DrawingHeader = ({ onGoToDashboard, onToggleTutorial, showTutorial }: Draw
           </Button>
           
           <Collapsible>
-            <CollapsibleTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                className={showTutorial ? "bg-blue-50 text-blue-500" : ""}
-                onClick={onToggleTutorial}
-              >
-                <BookOpen className="h-4 w-4" />
-              </Button>
-            </CollapsibleTrigger>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <CollapsibleTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className={showTutorial ? "bg-blue-50 text-blue-500" : ""}
+                      onClick={onToggleTutorial}
+                    >
+                      <BookOpen className="h-4 w-4" />
+                    </Button>
+                  </CollapsibleTrigger>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={10}>
+                  <p>Access tutorial anytime here</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </Collapsible>
           
           <Button variant="ghost" size="icon">
