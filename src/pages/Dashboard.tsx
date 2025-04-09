@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '@/App';
@@ -48,6 +47,10 @@ const Dashboard = () => {
         { name: "Simple Renovation", type: "General", popular: false },
       ];
     }
+  };
+
+  const handleCreateDrawing = () => {
+    navigate('/drawing-board');
   };
 
   return (
@@ -150,7 +153,7 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    <Button variant="outline" className="w-full justify-start text-left">
+                    <Button variant="outline" className="w-full justify-start text-left" onClick={handleCreateDrawing}>
                       <FileText className="mr-2 h-4 w-4" />
                       New Project
                     </Button>
@@ -198,7 +201,7 @@ const Dashboard = () => {
               <FileText className="h-12 w-12 mx-auto text-gray-400" />
               <h3 className="mt-4 text-lg font-medium">No drawings yet</h3>
               <p className="mt-2 text-gray-500">Create your first drawing to see it here</p>
-              <Button className="mt-4">Create New Drawing</Button>
+              <Button className="mt-4" onClick={handleCreateDrawing}>Create New Drawing</Button>
             </div>
           </TabsContent>
           
