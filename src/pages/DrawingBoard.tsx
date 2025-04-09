@@ -19,11 +19,19 @@ const DrawingBoard = () => {
     }
   }, [user, navigate]);
 
+  const handleToggleTutorial = () => {
+    setShowTutorial(!showTutorial);
+  };
+
   if (!user) return null;
 
   return (
     <div className="flex flex-col h-screen bg-white overflow-hidden">
-      <DrawingHeader onGoToDashboard={() => navigate('/dashboard')} />
+      <DrawingHeader 
+        onGoToDashboard={() => navigate('/dashboard')} 
+        onToggleTutorial={handleToggleTutorial}
+        showTutorial={showTutorial}
+      />
       
       <div className="flex flex-1 overflow-hidden">
         {/* Left sidebar with tools */}
@@ -38,15 +46,8 @@ const DrawingBoard = () => {
             <div className="absolute bottom-6 left-6 right-6 z-50 max-w-2xl mx-auto">
               <Tutorial 
                 urgentNeed={user.urgentNeed || "Creating a professional drawing or plan"} 
+                onDismiss={() => setShowTutorial(false)}
               />
-              <div className="flex justify-end mt-4">
-                <button 
-                  onClick={() => setShowTutorial(false)}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm"
-                >
-                  Dismiss tutorial
-                </button>
-              </div>
             </div>
           )}
         </div>

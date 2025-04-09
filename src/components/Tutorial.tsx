@@ -1,14 +1,15 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
+import { CheckCircle, ArrowRight, CheckCircle2, ExternalLink, X } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 
 interface TutorialProps {
   urgentNeed: string;
+  onDismiss: () => void;
 }
 
-const Tutorial: React.FC<TutorialProps> = ({ urgentNeed }) => {
+const Tutorial: React.FC<TutorialProps> = ({ urgentNeed, onDismiss }) => {
   const [completed, setCompleted] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -121,7 +122,16 @@ const Tutorial: React.FC<TutorialProps> = ({ urgentNeed }) => {
 
   if (completed) {
     return (
-      <div className="bg-white rounded-xl shadow-lg p-8 mb-8 animate-fade-in">
+      <div className="bg-white rounded-xl shadow-lg p-8 mb-8 animate-fade-in relative">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="absolute right-2 top-2" 
+          onClick={onDismiss}
+        >
+          <X className="h-4 w-4" />
+        </Button>
+        
         <div className="flex items-center justify-center mb-6">
           <div className="bg-green-50 rounded-full p-3">
             <CheckCircle2 className="w-12 h-12 text-green-500" />
@@ -160,7 +170,16 @@ const Tutorial: React.FC<TutorialProps> = ({ urgentNeed }) => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 mb-8 animate-fade-in">
+    <div className="bg-white rounded-xl shadow-lg p-8 mb-8 animate-fade-in relative">
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        className="absolute right-2 top-2" 
+        onClick={onDismiss}
+      >
+        <X className="h-4 w-4" />
+      </Button>
+      
       <h2 className="text-2xl font-bold text-gray-900 mb-2">{tutorialContent.title}</h2>
       <p className="text-gray-600 mb-6">{tutorialContent.description}</p>
       
@@ -194,13 +213,6 @@ const Tutorial: React.FC<TutorialProps> = ({ urgentNeed }) => {
         <Button onClick={handleNextStep}>
           {currentStep < tutorialContent.steps.length - 1 ? 'Next Step' : 'Complete Tutorial'}
         </Button>
-      </div>
-      
-      <div className="mt-6 text-center text-sm text-gray-500">
-        <a href="#" className="inline-flex items-center text-blue-600 hover:text-blue-800">
-          <span>Skip tutorial</span>
-          <ExternalLink className="ml-1 w-3 h-3" />
-        </a>
       </div>
     </div>
   );

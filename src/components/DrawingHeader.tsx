@@ -1,13 +1,16 @@
 
 import React from 'react';
-import { ArrowLeft, Undo, Redo, Download, Share, Settings, Save, HelpCircle } from 'lucide-react';
+import { ArrowLeft, Undo, Redo, Download, Share, Settings, Save, HelpCircle, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
 
 interface DrawingHeaderProps {
   onGoToDashboard: () => void;
+  onToggleTutorial: () => void;
+  showTutorial: boolean;
 }
 
-const DrawingHeader = ({ onGoToDashboard }: DrawingHeaderProps) => {
+const DrawingHeader = ({ onGoToDashboard, onToggleTutorial, showTutorial }: DrawingHeaderProps) => {
   return (
     <header className="border-b border-gray-200 bg-white px-4 py-2">
       <div className="flex items-center justify-between">
@@ -50,6 +53,20 @@ const DrawingHeader = ({ onGoToDashboard }: DrawingHeaderProps) => {
           <Button variant="ghost" size="icon">
             <Save className="h-4 w-4" />
           </Button>
+          
+          <Collapsible>
+            <CollapsibleTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className={showTutorial ? "bg-blue-50 text-blue-500" : ""}
+                onClick={onToggleTutorial}
+              >
+                <BookOpen className="h-4 w-4" />
+              </Button>
+            </CollapsibleTrigger>
+          </Collapsible>
+          
           <Button variant="ghost" size="icon">
             <HelpCircle className="h-4 w-4" />
           </Button>
